@@ -1,0 +1,171 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserType {
+  student
+  admin
+  mentor
+}
+
+enum ConnectionStatus {
+  pending
+  accepted
+  rejected
+}
+
+enum SenderType {
+  user
+  bot
+}
+
+enum CampaignStatus {
+  draft
+  scheduled
+  active
+  completed
+}
+
+model User {
+  id               String @id @default(uuid())
+  email            String @unique
+  passwordHash     String @map("password_hash")
+  fullName         String @map("full_name")
+  userType         UserType @map("user_type")
+  anonymityLevel   Int @default(50) @map("anonymity_level")
+  isActive         Boolean @default(true) @map("is_active")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  moodEntries      MoodEntry[]
+  chatSessions     ChatSession[]
+  mentorProfile    MentorProfile?
+  studentConnections Connection[] @relation("StudentConnections")
+  mentorConnections  Connection[] @relation("MentorConnections")
+  crisisAlerts     CrisisAlert[]
+
+  @@map("users")
+}
+
+model MoodEntry {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  moodScore Int      @map("mood_score") // 1-5
+  notes     String?
+  timestamp DateTime @default(now())
+  location  String?  // Added for heatmap functionality
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("mood_entries")
+}
+
+model ChatSession {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages ChatMessage[]
+
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id         String     @id @default(uuid())
+  sessionId  String     @map("session_id")
+  senderType SenderType @map("sender_type")
+  text       String
+  timestamp  DateTime   @default(now())
+
+  // Relations
+  session ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@map("chat_messages")
+}
+
+model MentorProfile {
+  id          String   @id @default(uuid())
+  userId      String   @unique @map("user_id")
+  department  String
+  year        String
+  specialties String[] // Array of strings
+  bio         String?
+  isAvailable Boolean  @default(true) @map("is_available")
+  rating      Decimal? @db.Decimal(2, 1)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("mentor_profiles")
+}
+
+model Connection {
+  id        String           @id @default(uuid())
+  studentId String           @map("student_id")
+  mentorId  String           @map("mentor_id")
+  status    ConnectionStatus @default(pending)
+  createdAt DateTime         @default(now()) @map("created_at")
+  updatedAt DateTime         @updatedAt @map("updated_at")
+
+  // Relations
+  student User @relation("StudentConnections", fields: [studentId], references: [id], onDelete: Cascade)
+  mentor  User @relation("MentorConnections", fields: [mentorId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, mentorId])
+  @@map("connections")
+}
+
+model CrisisAlert {
+  id            String   @id @default(uuid())
+  userId        String?  @map("user_id") // Nullable for anonymous alerts
+  areaOfConcern String   @map("area_of_concern")
+  description   String?
+  timestamp     DateTime @default(now())
+  isResolved    Boolean  @default(false) @map("is_resolved")
+  resolvedAt    DateTime? @map("resolved_at")
+
+  // Relations
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("crisis_alerts")
+}
+
+model Campaign {
+  id          String         @id @default(uuid())
+  title       String
+  date        DateTime
+  department  String
+  description String?
+  status      CampaignStatus @default(draft)
+  reach       Int?           // Number of people reached
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+
+  @@map("campaigns")
+}
+
+model Resource {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  url         String?
+  category    String
+  isPublic    Boolean  @default(true) @map("is_public")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("resources")
+}
