@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium Mental Health Platform Design System */
+/* Sophisticated color palette with psychological color theory */
+
+@layer base {
+  :root {
+    /* Premium Color Foundation */
+    --background: 210 25% 98%;
+    --foreground: 216 28% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 216 28% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 28% 12%;
+
+    /* Primary: Trust Blue - Sophisticated navy that instills confidence */
+    --primary: 217 89% 61%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 217 89% 71%;
+    --primary-deep: 217 89% 51%;
+
+    /* Secondary: Serene Sage - Calming green for wellness */
+    --secondary: 157 64% 52%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 157 64% 62%;
+
+    /* Muted: Premium Neutrals */
+    --muted: 210 30% 96%;
+    --muted-foreground: 215 20% 45%;
+
+    /* Accent: Mindful Purple - Creativity and mindfulness */
+    --accent: 262 73% 57%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 262 73% 67%;
+
+    /* Destructive: Supportive Coral - Warm but attention-getting */
+    --destructive: 14 91% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Interactive Elements */
+    --border: 214 25% 88%;
+    --input: 214 25% 92%;
+    --ring: 217 89% 61%;
+
+    /* Mental Health Semantic Colors */
+    --wellness: 157 64% 52%;
+    --wellness-light: 157 64% 97%;
+    --wellness-glow: 157 64% 62%;
+
+    --crisis: 14 91% 60%;
+    --crisis-light: 14 91% 97%;
+    --crisis-glow: 14 91% 70%;
+
+    --calm: 200 85% 55%;
+    --calm-light: 200 85% 97%;
+    --calm-glow: 200 85% 65%;
+
+    --success: 142 71% 45%;
+    --success-light: 142 71% 97%;
+
+    --warning: 38 92% 50%;
+    --warning-light: 38 92% 97%;
+
+    /* Premium Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-wellness: linear-gradient(135deg, hsl(var(--wellness)), hsl(var(--wellness-glow)));
+    --gradient-calm: linear-gradient(135deg, hsl(var(--calm)), hsl(var(--calm-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--wellness)) 100%);
+    --gradient-surface: linear-gradient(145deg, hsl(var(--background)) 0%, hsl(210 30% 99%) 100%);
+    --gradient-glass: linear-gradient(145deg, hsla(0, 0%, 100%, 0.8) 0%, hsla(0, 0%, 100%, 0.4) 100%);
+
+    /* Premium Shadows & Effects */
+    --shadow-soft: 0 2px 20px -2px hsl(var(--primary) / 0.08), 0 8px 16px -4px hsl(var(--primary) / 0.04);
+    --shadow-wellness: 0 4px 20px -2px hsl(var(--wellness) / 0.12), 0 8px 16px -4px hsl(var(--wellness) / 0.06);
+    --shadow-crisis: 0 4px 20px -2px hsl(var(--crisis) / 0.15), 0 8px 16px -4px hsl(var(--crisis) / 0.08);
+    --shadow-glow: 0 0 0 1px hsl(var(--primary) / 0.05), 0 8px 32px hsl(var(--primary) / 0.12);
+    --shadow-elevated: 0 20px 40px -12px hsl(216 28% 12% / 0.15), 0 8px 24px -8px hsl(216 28% 12% / 0.08);
+
+    /* Typography & Layout */
+    --radius: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+
+    /* Sidebar Design */
+    --sidebar-background: 216 28% 99%;
+    --sidebar-foreground: 216 28% 12%;
+    --sidebar-primary: 217 89% 61%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 30% 96%;
+    --sidebar-accent-foreground: 216 28% 12%;
+    --sidebar-border: 214 25% 88%;
+    --sidebar-ring: 217 89% 61%;
+
+    /* Glass Effects */
+    --glass-bg: hsla(0, 0%, 100%, 0.8);
+    --glass-border: hsla(0, 0%, 100%, 0.2);
+    --glass-shadow: 0 8px 32px hsla(216, 28%, 12%, 0.1);
+  }
+
+  .dark {
+    /* Dark Mode - Premium Dark Theme */
+    --background: 216 28% 6%;
+    --foreground: 210 25% 95%;
+
+    --card: 216 28% 8%;
+    --card-foreground: 210 25% 95%;
+
+    --popover: 216 28% 8%;
+    --popover-foreground: 210 25% 95%;
+
+    --primary: 217 89% 65%;
+    --primary-foreground: 216 28% 8%;
+    --primary-glow: 217 89% 75%;
+
+    --secondary: 157 64% 58%;
+    --secondary-foreground: 216 28% 8%;
+
+    --muted: 216 28% 12%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 262 73% 63%;
+    --accent-foreground: 216 28% 8%;
+
+    --destructive: 14 91% 65%;
+    --destructive-foreground: 216 28% 8%;
+
+    --border: 216 28% 15%;
+    --input: 216 28% 15%;
+    --ring: 217 89% 65%;
+
+    --wellness: 157 64% 58%;
+    --wellness-light: 157 64% 15%;
+
+    --crisis: 14 91% 65%;
+    --crisis-light: 14 91% 15%;
+
+    --calm: 200 85% 60%;
+    --calm-light: 200 85% 15%;
+
+    --sidebar-background: 216 28% 4%;
+    --sidebar-foreground: 210 25% 95%;
+    --sidebar-primary: 217 89% 65%;
+    --sidebar-primary-foreground: 216 28% 6%;
+    --sidebar-accent: 216 28% 10%;
+    --sidebar-accent-foreground: 210 25% 95%;
+    --sidebar-border: 216 28% 15%;
+    --sidebar-ring: 217 89% 65%;
+
+    --glass-bg: hsla(216, 28%, 8%, 0.8);
+    --glass-border: hsla(216, 28%, 25%, 0.2);
+    --glass-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-gradient-surface text-foreground font-medium antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+}
+
+@layer components {
+  /* Premium Glass Effect */
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
+
+  /* Premium Card Variants */
+  .card-premium {
+    @apply bg-card/80 backdrop-blur-xl border-border/50 shadow-elevated rounded-xl;
+  }
+
+  .card-glass {
+    @apply glass rounded-xl;
+  }
+
+  /* Interactive Elements */
+  .btn-glass {
+    @apply glass hover:shadow-glow transition-all duration-300 ease-out;
+  }
+
+  /* Smooth Hover Effects */
+  .hover-lift {
+    @apply transform transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-elevated;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 ease-out hover:shadow-glow;
+  }
+
+  /* Premium Scrollbars */
+  .scrollbar-premium {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.3) transparent;
+  }
+
+  .scrollbar-premium::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-premium::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-premium::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 3px;
+  }
+
+  .scrollbar-premium::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  /* Text Gradients */
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary via-accent to-wellness bg-clip-text text-transparent;
+  }
+
+  .text-gradient-wellness {
+    @apply bg-gradient-to-r from-wellness to-wellness-glow bg-clip-text text-transparent;
+  }
+
+  /* Premium Status Indicators */
+  .status-indicator {
+    @apply relative inline-flex h-3 w-3 rounded-full;
+  }
+
+  .status-indicator::after {
+    @apply absolute inline-flex h-full w-full rounded-full opacity-75 animate-ping;
+    content: '';
+  }
+
+  .status-available {
+    @apply bg-success;
+  }
+
+  .status-available::after {
+    @apply bg-success;
+  }
+
+  .status-busy {
+    @apply bg-warning;
+  }
+
+  .status-busy::after {
+    @apply bg-warning;
+  }
+}
